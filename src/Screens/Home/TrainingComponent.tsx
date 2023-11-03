@@ -3,6 +3,7 @@ import { Box, Paper, IconButton, Button } from "@mui/material"
 import { DeleteForever } from "@mui/icons-material"
 import { useConfirmDialog } from "burgos-confirm"
 import { useTrainings } from "../../hooks/useTrainings"
+import { useNavigate } from "react-router-dom"
 
 interface TrainingComponentProps {
     training: Training
@@ -11,6 +12,7 @@ interface TrainingComponentProps {
 export const TrainingComponent: React.FC<TrainingComponentProps> = ({ training }) => {
     const { confirm } = useConfirmDialog()
     const { remove } = useTrainings()
+    const navigate = useNavigate()
 
     const deleteTraining = () => {
         confirm({
@@ -24,7 +26,7 @@ export const TrainingComponent: React.FC<TrainingComponentProps> = ({ training }
     }
 
     return (
-        <Paper sx={{ flexDirection: "column", width: "70vw", padding: "5vw", gap: "3vw", height: "50vh" }}>
+        <Paper sx={{ flexDirection: "column", width: "70vw", padding: "5vw", gap: "3vw", minHeight: "100vw" }}>
             <Box sx={{ justifyContent: "space-between", gap: "5vw" }}>
                 <p
                     style={{
@@ -46,12 +48,18 @@ export const TrainingComponent: React.FC<TrainingComponentProps> = ({ training }
                     <DeleteForever sx={{ width: "5vw" }} />
                 </Button>
             </Box>
-            {training.exercises.map((exercise) => (
-                <Box key={exercise.id} sx={{ color: "text.secondary", justifyContent: "space-between" }}>
-                    <p>{exercise.name}</p>
-                    <p>{exercise.weight.text} kg</p>
-                </Box>
-            ))}
+            <Box sx={{ flexDirection: "column", gap: "3vw", overflowY: "auto", height: "75vw" }}>
+                {training.exercises.map((exercise) => (
+                    <Box key={exercise.id} sx={{ color: "text.secondary", justifyContent: "space-between" }}>
+                        <p>{exercise.name}</p>
+                        <p>{exercise.weight.text} kg</p>
+                    </Box>
+                ))}
+            </Box>
+
+            <Button variant="outlined" onClick={() => navigate("/form/training", { state: { training } })}>
+                edit
+            </Button>
         </Paper>
     )
 }
