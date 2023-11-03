@@ -1,42 +1,58 @@
 import React from 'react'
 import {Box, TextField, Button} from '@mui/material'
 import { useFormik } from 'formik'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from "react-router-dom"
 
 interface ExerciseFormProps {
     addExercise: (exercise: Exercise) => void
 }
 
-export const ExerciseForm:React.FC<ExerciseFormProps> = ({ addExercise }) => {
+export const ExerciseForm: React.FC<ExerciseFormProps> = ({ addExercise }) => {
     const navigate = useNavigate()
+    const location = useLocation()
 
-    const initialValues: Exercise = {
+    const exercise: Exercise | undefined = location.state?.exercise
+
+    const initialValues: Exercise = exercise || {
         id: new Date().getTime(),
-        name: '',
+        name: "",
+        note: "",
         weight: {
             date: new Date().getTime(),
             history: [],
-            text: ''
-        }
+            text: "",
+        },
     }
 
     const formik = useFormik({
-        initialValues, onSubmit: values => {
+        initialValues,
+        onSubmit: (values) => {
             addExercise(values)
             navigate(-1)
-        console.log(values)
-    }})
+            console.log(values)
+        },
+    })
 
     return (
-        <Box sx={{ flexDirection: 'column', gap: '5vw', }}>
-            <p style={{fontSize: '1.5rem'}}>new exercise</p>
-                <TextField label='name' name='name' value={formik.values.name} onChange={formik.handleChange} />
-                <TextField label='weight' name='weight.text' value={formik.values.weight.text} onChange={formik.handleChange} InputProps={{endAdornment: <>kg</>}} />
+        <Box sx={{ flexDirection: "column", gap: "5vw" }}>
+            <p style={{ fontSize: "1.5rem" }}>{exercise ? "edit exercise" : "new exercise"}</p>
+            <TextField label="name" name="name" value={formik.values.name} onChange={formik.handleChange} />
+            <TextField
+                label="weight"
+                name="weight.text"
+                value={formik.values.weight.text}
+                onChange={formik.handleChange}
+                InputProps={{ endAdornment: <>kg</> }}
+            />
 
-                <Box sx={{gap: '5vw'}}>
-                    <Button variant='outlined' color='error' onClick={() => navigate(-1)} fullWidth>cancel</Button>
-                    <Button variant='outlined' onClick={() => formik.handleSubmit()} fullWidth>done</Button>
-                </Box>
+            <Box sx={{ gap: "5vw" }}>
+                <Button variant="outlined" color="error" onClick={() => navigate(-1)} fullWidth>
+                    cancel
+                </Button>
+                <Button variant="outlined" onClick={() => formik.handleSubmit()} fullWidth>
+                    done
+                </Button>
+            </Box>
         </Box>
     )
 }

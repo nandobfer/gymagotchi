@@ -1,7 +1,8 @@
 declare interface Exercise {
     id: number
     name: string
-    
+    note: string
+
     weight: CurrentWeight
 }
 

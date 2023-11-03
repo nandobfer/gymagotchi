@@ -1,17 +1,15 @@
 import React from 'react'
 import {Box, TextField, Paper, Button} from '@mui/material'
-import { useFormik } from 'formik'
-import { ExerciseContainer } from './ExerciseContainer'
-import { Route, Routes, useLocation, useNavigate } from 'react-router-dom'
-import { ExerciseForm } from './ExerciseForm'
-import { useTrainings } from '../../hooks/useTrainings'
-import { useSnackbar } from 'burgos-snackbar'
+import { useFormik } from "formik"
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom"
+import { ExerciseForm } from "./ExerciseForm"
+import { useTrainings } from "../../hooks/useTrainings"
+import { useSnackbar } from "burgos-snackbar"
+import { ExerciseContainer } from "../../components/ExerciseContainer"
 
-interface TrainingFormProps {
-    
-}
+interface TrainingFormProps {}
 
-export const TrainingForm: React.FC<TrainingFormProps> = ({ }) => {
+export const TrainingForm: React.FC<TrainingFormProps> = ({}) => {
     const navigate = useNavigate()
     const location = useLocation()
     const { add } = useTrainings()
@@ -49,7 +47,7 @@ export const TrainingForm: React.FC<TrainingFormProps> = ({ }) => {
     })
 
     const addExercise = (exercise: Exercise) => {
-        formik.setFieldValue("exercises", [...formik.values.exercises, exercise])
+        formik.setFieldValue("exercises", [...formik.values.exercises.filter((item) => item.id != exercise.id), exercise])
     }
 
     return (
@@ -63,12 +61,12 @@ export const TrainingForm: React.FC<TrainingFormProps> = ({ }) => {
                     <Route
                         index
                         element={
-                            <Paper sx={{ flexDirection: "column", width: "80vw", padding: "3vw", gap: "3vw" }}>
+                            <Paper sx={{ flexDirection: "column", width: "80vw", padding: "5vw", gap: "3vw" }}>
                                 <Button variant="outlined" onClick={() => navigate("exercise")}>
                                     new exercise
                                 </Button>
                                 {formik.values.exercises.map((exercise) => (
-                                    <ExerciseContainer key={exercise.id} exercise={exercise} />
+                                    <ExerciseContainer key={exercise.id} exercise={exercise} edit />
                                 ))}
                             </Paper>
                         }

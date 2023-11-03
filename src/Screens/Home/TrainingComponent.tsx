@@ -4,6 +4,7 @@ import { DeleteForever } from "@mui/icons-material"
 import { useConfirmDialog } from "burgos-confirm"
 import { useTrainings } from "../../hooks/useTrainings"
 import { useNavigate } from "react-router-dom"
+import { ExerciseContainer } from "../../components/ExerciseContainer"
 
 interface TrainingComponentProps {
     training: Training
@@ -30,7 +31,7 @@ export const TrainingComponent: React.FC<TrainingComponentProps> = ({ training }
             <Box sx={{ justifyContent: "space-between", gap: "5vw" }}>
                 <p
                     style={{
-                        fontSize: "1.5rem",
+                        fontSize: "1.3rem",
                         fontWeight: "bold",
                         textOverflow: "ellipsis",
                         whiteSpace: "nowrap",
@@ -50,10 +51,7 @@ export const TrainingComponent: React.FC<TrainingComponentProps> = ({ training }
             </Box>
             <Box sx={{ flexDirection: "column", gap: "3vw", overflowY: "auto", height: "75vw" }}>
                 {training.exercises.map((exercise) => (
-                    <Box key={exercise.id} sx={{ color: "text.secondary", justifyContent: "space-between" }}>
-                        <p>{exercise.name}</p>
-                        <p>{exercise.weight.text} kg</p>
-                    </Box>
+                    <ExerciseContainer key={exercise.id} exercise={exercise} />
                 ))}
             </Box>
 
