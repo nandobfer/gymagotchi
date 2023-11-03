@@ -8,5 +8,9 @@ export const useTrainings = () => {
         setTrainings(list => [...list.filter(item => item.id != training.id), training])
     }
 
-    return {trainings, add}
+    const remove = (training: Training) => {
+        setTrainings((list) => list.filter((item) => item.id != training.id))
+    }
+
+    return { trainings, add, remove }
 }
