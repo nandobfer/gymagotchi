@@ -65,9 +65,11 @@ export const TrainingForm: React.FC<TrainingFormProps> = ({}) => {
                                 <Button variant="outlined" onClick={() => navigate("exercise")}>
                                     new exercise
                                 </Button>
-                                {formik.values.exercises.map((exercise) => (
-                                    <ExerciseContainer key={exercise.id} exercise={exercise} edit />
-                                ))}
+                                {formik.values.exercises
+                                    .sort((a, b) => a.id - b.id)
+                                    .map((exercise) => (
+                                        <ExerciseContainer key={exercise.id} exercise={exercise} edit />
+                                    ))}
                             </Paper>
                         }
                     />

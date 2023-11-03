@@ -44,6 +44,7 @@ export const ExerciseForm: React.FC<ExerciseFormProps> = ({ addExercise }) => {
                 onChange={formik.handleChange}
                 InputProps={{ endAdornment: <>kg</> }}
             />
+            <TextField label="note" name="note" value={formik.values.note} onChange={formik.handleChange} />
 
             <Box sx={{ gap: "5vw" }}>
                 <Button variant="outlined" color="error" onClick={() => navigate(-1)} fullWidth>

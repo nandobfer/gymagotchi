@@ -50,9 +50,11 @@ export const TrainingComponent: React.FC<TrainingComponentProps> = ({ training }
                 </Button>
             </Box>
             <Box sx={{ flexDirection: "column", gap: "3vw", overflowY: "auto", height: "75vw" }}>
-                {training.exercises.map((exercise) => (
-                    <ExerciseContainer key={exercise.id} exercise={exercise} />
-                ))}
+                {training.exercises
+                    .sort((a, b) => a.id - b.id)
+                    .map((exercise) => (
+                        <ExerciseContainer key={exercise.id} exercise={exercise} />
+                    ))}
             </Box>
 
             <Button variant="outlined" onClick={() => navigate("/form/training", { state: { training } })}>
