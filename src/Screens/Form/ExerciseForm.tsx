@@ -17,6 +17,7 @@ export const ExerciseForm: React.FC<ExerciseFormProps> = ({ addExercise }) => {
         id: new Date().getTime(),
         name: "",
         note: "",
+        series: "",
         weight: {
             date: new Date().getTime(),
             history: [],
@@ -44,6 +45,7 @@ export const ExerciseForm: React.FC<ExerciseFormProps> = ({ addExercise }) => {
                 onChange={formik.handleChange}
                 InputProps={{ endAdornment: <>kg</> }}
             />
+            <TextField label="series" name="series" value={formik.values.series} onChange={formik.handleChange} inputMode="numeric" />
             <TextField label="note" name="note" value={formik.values.note} onChange={formik.handleChange} />
 
             <Box sx={{ gap: "5vw" }}>

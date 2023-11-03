@@ -2,6 +2,7 @@ declare interface Exercise {
     id: number
     name: string
     note: string
+    series: string
 
     weight: CurrentWeight
 }
