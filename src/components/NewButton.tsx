@@ -8,7 +8,11 @@ interface NewButtonProps {
 export const NewButton:React.FC<NewButtonProps> = ({ onClick }) => {
     
     return (
-        <Button onClick={onClick} variant='contained' sx={{borderRadius: '100%', fontSize: '3rem', width: '15vw', height: '15vw', position: 'absolute', bottom: '5vw', right: '5vw'}}>
+        <Button
+            onClick={onClick}
+            variant="outlined"
+            sx={{ fontSize: "3rem", width: "15vw", height: "15vw", position: "absolute", bottom: "5vw", right: "5vw" }}
+        >
             +
         </Button>
     )
