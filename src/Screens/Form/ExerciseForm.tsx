@@ -36,7 +36,7 @@ export const ExerciseForm: React.FC<ExerciseFormProps> = ({ addExercise }) => {
     return (
         <Box sx={{ flexDirection: "column", gap: "5vw" }}>
             <p style={{ fontSize: "1.5rem" }}>{exercise ? "edit exercise" : "new exercise"}</p>
-            <TextField label="name" name="name" value={formik.values.name} onChange={formik.handleChange} />
+            <TextField label="name" name="name" value={formik.values.name} onChange={formik.handleChange} autoFocus />
             <TextField
                 label="weight"
                 name="weight.text"

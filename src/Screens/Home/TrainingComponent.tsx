@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Paper, IconButton, Button } from "@mui/material"
+import { Box, Paper, Button } from "@mui/material"
 import { DeleteForever } from "@mui/icons-material"
 import { useConfirmDialog } from "burgos-confirm"
 import { useTrainings } from "../../hooks/useTrainings"
