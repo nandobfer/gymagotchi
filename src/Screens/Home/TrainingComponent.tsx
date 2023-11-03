@@ -49,7 +49,7 @@ export const TrainingComponent: React.FC<TrainingComponentProps> = ({ training }
                     <DeleteForever sx={{ width: "5vw" }} />
                 </Button>
             </Box>
-            <Box sx={{ flexDirection: "column", gap: "3vw", overflowY: "auto", height: "75vw" }}>
+            <Box sx={{ flexDirection: "column", gap: "3vw", overflowY: "auto", height: "75vw", overflowX: "hidden" }}>
                 {training.exercises
                     .sort((a, b) => a.id - b.id)
                     .map((exercise) => (
