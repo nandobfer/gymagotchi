@@ -42,11 +42,13 @@ export const ExerciseContainer: React.FC<ExerciseContainerProps> = ({ exercise, 
                     <p style={{ textOverflow: "ellipsis", overflow: "hidden", whiteSpace: "nowrap", width: "50vw" }}>{exercise.note}</p>
                 </Box>
 
-                <Box sx={{ gap: "3vw", marginLeft: "-3vw" }}>
-                    {seriesArray.map((index) => (
-                        <Checkbox edge="end" checked={seriesDone[index - 1][0]} onChange={(_, checked) => seriesDone[index - 1][1](checked)} />
-                    ))}
-                </Box>
+                {!edit && (
+                    <Box sx={{ gap: "3vw", marginLeft: "-3vw" }}>
+                        {seriesArray.map((index) => (
+                            <Checkbox edge="end" checked={seriesDone[index - 1][0]} onChange={(_, checked) => seriesDone[index - 1][1](checked)} />
+                        ))}
+                    </Box>
+                )}
             </Box>
 
             <Box sx={{ alignItems: "center", justifyContent: "space-between" }}>
