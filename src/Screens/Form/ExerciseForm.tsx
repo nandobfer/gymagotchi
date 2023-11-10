@@ -38,12 +38,13 @@ export const ExerciseForm: React.FC<ExerciseFormProps> = ({ addExercise }) => {
     return (
         <Box sx={{ flexDirection: "column", gap: "5vw", paddingBottom: "5vw" }}>
             <p style={{ fontSize: "1.5rem" }}>{exercise ? "edit exercise" : "new exercise"}</p>
-            <TextField label="name" name="name" value={formik.values.name} onChange={formik.handleChange} autoFocus />
+            <TextField label="name" name="name" value={formik.values.name} onChange={formik.handleChange} required autoFocus />
             <TextField
                 label="weight"
                 name="weight.text"
                 value={formik.values.weight.text}
                 onChange={formik.handleChange}
+                inputProps={{ inputMode: "numeric" }}
                 InputProps={{
                     endAdornment: (
                         <TextField
@@ -60,7 +61,14 @@ export const ExerciseForm: React.FC<ExerciseFormProps> = ({ addExercise }) => {
                     ),
                 }}
             />
-            <TextField label="series" name="series" value={formik.values.series} onChange={formik.handleChange} inputMode="numeric" />
+            <TextField
+                label="series"
+                name="series"
+                value={formik.values.series}
+                onChange={formik.handleChange}
+                inputProps={{ inputMode: "numeric" }}
+                required
+            />
             <TextField label="note" name="note" value={formik.values.note} onChange={formik.handleChange} />
 
             <Box sx={{ gap: "5vw" }}>

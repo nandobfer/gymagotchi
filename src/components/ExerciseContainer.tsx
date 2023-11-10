@@ -1,7 +1,8 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { Box, Button, Checkbox } from "@mui/material"
 import EditIcon from "@mui/icons-material/Edit"
 import { useNavigate } from "react-router-dom"
+import { useArray } from "burgos-array"
 
 interface ExerciseContainerProps {
     exercise: Exercise
@@ -10,8 +11,15 @@ interface ExerciseContainerProps {
 
 export const ExerciseContainer: React.FC<ExerciseContainerProps> = ({ exercise, edit }) => {
     const navigate = useNavigate()
+    const seriesArray = useArray().newArray(Number(exercise.series))
 
+    const seriesDone = seriesArray.map((index) => useState(false))
     const [done, setDone] = useState(false)
+
+    useEffect(() => {
+        const finishedQuantity = seriesDone.reduce((done, series) => (series[0] ? done + 1 : done), 0)
+        setDone(finishedQuantity == seriesArray.length)
+    }, [seriesDone])
 
     return (
         <Box
@@ -33,15 +41,19 @@ export const ExerciseContainer: React.FC<ExerciseContainerProps> = ({ exercise, 
                 <Box sx={{ color: done ? "success.main" : "warning.main" }}>
                     <p style={{ textOverflow: "ellipsis", overflow: "hidden", whiteSpace: "nowrap", width: "50vw" }}>{exercise.note}</p>
                 </Box>
+
+                <Box sx={{ gap: "3vw", marginLeft: "-3vw" }}>
+                    {seriesArray.map((index) => (
+                        <Checkbox edge="end" checked={seriesDone[index - 1][0]} onChange={(_, checked) => seriesDone[index - 1][1](checked)} />
+                    ))}
+                </Box>
             </Box>
 
             <Box sx={{ alignItems: "center", justifyContent: "space-between" }}>
-                {edit ? (
+                {edit && (
                     <Button variant="outlined" sx={{ width: "7vw", minWidth: "7vw" }} onClick={() => navigate("exercise", { state: { exercise } })}>
                         <EditIcon sx={{ width: "5vw", height: "5vw" }} />
                     </Button>
-                ) : (
-                    <Checkbox checked={done} onChange={(_, checked) => setDone(checked)} />
                 )}
             </Box>
         </Box>
