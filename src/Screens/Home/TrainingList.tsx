@@ -2,14 +2,13 @@ import React from 'react'
 import {Box} from '@mui/material'
 import { useTrainings } from '../../hooks/useTrainings'
 import { TrainingComponent } from './TrainingComponent'
+import { NewTrainingButton } from "../../components/NewTrainingButton"
 
-interface TrainingListProps {
-    
-}
+interface TrainingListProps {}
 
-export const TrainingList:React.FC<TrainingListProps> = ({  }) => {
-    const {trainings} = useTrainings()
-    
+export const TrainingList: React.FC<TrainingListProps> = ({}) => {
+    const { trainings } = useTrainings()
+
     return (
         <Box sx={{ color: "text.secondary", width: "100vw", overflowX: "auto", gap: "5vw", padding: "0 10vw" }}>
             {trainings
@@ -17,6 +16,7 @@ export const TrainingList:React.FC<TrainingListProps> = ({  }) => {
                 .map((training) => (
                     <TrainingComponent key={training.id} training={training} />
                 ))}
+            <NewTrainingButton />
         </Box>
     )
 }
