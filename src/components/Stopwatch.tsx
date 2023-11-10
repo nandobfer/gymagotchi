@@ -1,11 +1,12 @@
 import React, { useCallback, useEffect, useState } from "react"
 import { Box, Button } from "@mui/material"
+import { useStopwatch } from "../hooks/useStopwatch"
 
 interface StopwatchProps {}
 
 export const Stopwatch: React.FC<StopwatchProps> = ({}) => {
+    const { clocking, setClocking } = useStopwatch()
     const [time, setTime] = useState(60)
-    const [clocking, setClocking] = useState(false)
 
     const resetClock = () => {
         setTime(60)

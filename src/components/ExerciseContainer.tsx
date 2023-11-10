@@ -3,6 +3,7 @@ import { Box, Button, Checkbox } from "@mui/material"
 import EditIcon from "@mui/icons-material/Edit"
 import { useNavigate } from "react-router-dom"
 import { useArray } from "burgos-array"
+import { useStopwatch } from "../hooks/useStopwatch"
 
 interface ExerciseContainerProps {
     exercise: Exercise
@@ -12,6 +13,7 @@ interface ExerciseContainerProps {
 export const ExerciseContainer: React.FC<ExerciseContainerProps> = ({ exercise, edit }) => {
     const navigate = useNavigate()
     const seriesArray = useArray().newArray(Number(exercise.series))
+    const { clocking, setClocking } = useStopwatch()
 
     const seriesDone = seriesArray.map((index) => useState(false))
     const [done, setDone] = useState(false)
@@ -45,7 +47,14 @@ export const ExerciseContainer: React.FC<ExerciseContainerProps> = ({ exercise, 
                 {!edit && (
                     <Box sx={{ gap: "3vw", marginLeft: "-3vw" }}>
                         {seriesArray.map((index) => (
-                            <Checkbox edge="end" checked={seriesDone[index - 1][0]} onChange={(_, checked) => seriesDone[index - 1][1](checked)} />
+                            <Checkbox
+                                edge="end"
+                                checked={seriesDone[index - 1][0]}
+                                onChange={(_, checked) => {
+                                    seriesDone[index - 1][1](checked)
+                                    if (checked) setClocking(true)
+                                }}
+                            />
                         ))}
                     </Box>
                 )}
