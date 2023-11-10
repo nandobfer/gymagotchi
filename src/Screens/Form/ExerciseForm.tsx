@@ -1,6 +1,6 @@
-import React from 'react'
-import {Box, TextField, Button} from '@mui/material'
-import { useFormik } from 'formik'
+import React, { useState } from "react"
+import { Box, TextField, Button, MenuItem } from "@mui/material"
+import { useFormik } from "formik"
 import { useLocation, useNavigate } from "react-router-dom"
 
 interface ExerciseFormProps {
@@ -22,6 +22,7 @@ export const ExerciseForm: React.FC<ExerciseFormProps> = ({ addExercise }) => {
             date: new Date().getTime(),
             history: [],
             text: "",
+            unit: "kg",
         },
     }
 
@@ -35,7 +36,7 @@ export const ExerciseForm: React.FC<ExerciseFormProps> = ({ addExercise }) => {
     })
 
     return (
-        <Box sx={{ flexDirection: "column", gap: "5vw" }}>
+        <Box sx={{ flexDirection: "column", gap: "5vw", paddingBottom: "5vw" }}>
             <p style={{ fontSize: "1.5rem" }}>{exercise ? "edit exercise" : "new exercise"}</p>
             <TextField label="name" name="name" value={formik.values.name} onChange={formik.handleChange} autoFocus />
             <TextField
@@ -43,7 +44,21 @@ export const ExerciseForm: React.FC<ExerciseFormProps> = ({ addExercise }) => {
                 name="weight.text"
                 value={formik.values.weight.text}
                 onChange={formik.handleChange}
-                InputProps={{ endAdornment: <>kg</> }}
+                InputProps={{
+                    endAdornment: (
+                        <TextField
+                            variant="standard"
+                            sx={{ width: "15vw" }}
+                            select
+                            value={formik.values.weight.unit}
+                            onChange={(event) => formik.setFieldValue("weight.unit", event.target.value)}
+                            InputProps={{ sx: { paddingRight: "5vw" } }}
+                        >
+                            <MenuItem value={"kg"}>kg</MenuItem>
+                            <MenuItem value={"barrinha"}>barrinha</MenuItem>
+                        </TextField>
+                    ),
+                }}
             />
             <TextField label="series" name="series" value={formik.values.series} onChange={formik.handleChange} inputMode="numeric" />
             <TextField label="note" name="note" value={formik.values.note} onChange={formik.handleChange} />

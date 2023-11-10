@@ -14,4 +14,5 @@ declare interface CurrentWeight extends Weight {
 declare interface Weight {
     text: string
     date: number
+    unit: "kg" | "barrinha"
 }
