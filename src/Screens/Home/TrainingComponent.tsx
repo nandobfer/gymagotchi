@@ -27,7 +27,7 @@ export const TrainingComponent: React.FC<TrainingComponentProps> = ({ training }
     }
 
     return (
-        <Paper sx={{ flexDirection: "column", width: "70vw", padding: "5vw", gap: "3vw", minHeight: "100vw" }}>
+        <Paper sx={{ flexDirection: "column", width: "80vw", padding: "5vw", gap: "3vw", minHeight: "100vw" }}>
             <Box sx={{ justifyContent: "space-between", gap: "5vw" }}>
                 <p
                     style={{
