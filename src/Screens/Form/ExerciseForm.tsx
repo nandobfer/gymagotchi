@@ -55,6 +55,7 @@ export const ExerciseForm: React.FC<ExerciseFormProps> = ({ addExercise }) => {
                             onChange={(event) => formik.setFieldValue("weight.unit", event.target.value)}
                             InputProps={{ sx: { paddingRight: "5vw" } }}
                         >
+                            <MenuItem value={""}></MenuItem>
                             <MenuItem value={"kg"}>kg</MenuItem>
                             <MenuItem value={"barrinha"}>barrinha</MenuItem>
                         </TextField>
