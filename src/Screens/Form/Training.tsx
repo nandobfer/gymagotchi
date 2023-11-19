@@ -91,7 +91,7 @@ export const TrainingForm: React.FC<TrainingFormProps> = ({}) => {
                 </Routes>
 
                 {!addingExercise && (
-                    <Box sx={{ gap: "5vw" }}>
+                    <Box sx={{ gap: "5vw", paddingBottom: "5vw" }}>
                         <Button variant="outlined" color="error" onClick={() => navigate("/")} fullWidth>
                             cancel
                         </Button>
