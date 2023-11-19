@@ -50,6 +50,7 @@ export const ExerciseContainer: React.FC<ExerciseContainerProps> = ({ exercise, 
                     <Box sx={{ gap: "3vw", marginLeft: "-3vw" }}>
                         {seriesArray.map((index) => (
                             <Checkbox
+                                key={index}
                                 edge="end"
                                 color={done ? "success" : "primary"}
                                 checked={seriesDone[index - 1][0]}
