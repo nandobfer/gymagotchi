@@ -4,13 +4,15 @@ import EditIcon from "@mui/icons-material/Edit"
 import { useNavigate } from "react-router-dom"
 import { useArray } from "burgos-array"
 import { useStopwatch } from "../hooks/useStopwatch"
+import { DeleteForever } from "@mui/icons-material"
 
 interface ExerciseContainerProps {
     exercise: Exercise
+    removeExercise: (exercise: Exercise) => void
     edit?: boolean
 }
 
-export const ExerciseContainer: React.FC<ExerciseContainerProps> = ({ exercise, edit }) => {
+export const ExerciseContainer: React.FC<ExerciseContainerProps> = ({ exercise, edit, removeExercise }) => {
     const navigate = useNavigate()
     const seriesArray = useArray().newArray(Number(exercise.series))
     const { clocking, setClocking } = useStopwatch()
@@ -62,9 +64,18 @@ export const ExerciseContainer: React.FC<ExerciseContainerProps> = ({ exercise, 
 
             <Box sx={{ alignItems: "center", justifyContent: "space-between" }}>
                 {edit && (
-                    <Button variant="outlined" sx={{ width: "7vw", minWidth: "7vw" }} onClick={() => navigate("exercise", { state: { exercise } })}>
-                        <EditIcon sx={{ width: "5vw", height: "5vw" }} />
-                    </Button>
+                    <Box sx={{ gap: "3vw" }}>
+                        <Button
+                            variant="outlined"
+                            sx={{ width: "7vw", minWidth: "7vw" }}
+                            onClick={() => navigate("exercise", { state: { exercise } })}
+                        >
+                            <EditIcon sx={{ width: "5vw", height: "5vw" }} />
+                        </Button>
+                        <Button variant="outlined" color="error" sx={{ width: "7vw", minWidth: "7vw" }} onClick={() => removeExercise(exercise)}>
+                            <DeleteForever sx={{ width: "5vw", height: "5vw" }} />
+                        </Button>
+                    </Box>
                 )}
             </Box>
         </Box>

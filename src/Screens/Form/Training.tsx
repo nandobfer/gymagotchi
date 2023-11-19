@@ -6,6 +6,7 @@ import { ExerciseForm } from "./ExerciseForm"
 import { useTrainings } from "../../hooks/useTrainings"
 import { useSnackbar } from "burgos-snackbar"
 import { ExerciseContainer } from "../../components/ExerciseContainer"
+import { useConfirmDialog } from "burgos-confirm"
 
 interface TrainingFormProps {}
 
@@ -14,6 +15,7 @@ export const TrainingForm: React.FC<TrainingFormProps> = ({}) => {
     const location = useLocation()
     const { add } = useTrainings()
     const { snackbar } = useSnackbar()
+    const { confirm } = useConfirmDialog()
 
     const pathname = location.pathname
     const training: Training | undefined = location.state?.training
@@ -50,6 +52,18 @@ export const TrainingForm: React.FC<TrainingFormProps> = ({}) => {
         formik.setFieldValue("exercises", [...formik.values.exercises.filter((item) => item.id != exercise.id), exercise])
     }
 
+    const removeExercise = (exercise: Exercise) => {
+        confirm({
+            title: "remove exercise",
+            content: "are you sure?",
+            onConfirm: () =>
+                formik.setFieldValue(
+                    "exercises",
+                    formik.values.exercises.filter((item) => item.id != exercise.id)
+                ),
+        })
+    }
+
     return (
         <Box sx={{ width: "100vw", color: "text.secondary", padding: "10vw", flexDirection: "column", gap: "5vw" }}>
             <form onSubmit={formik.handleSubmit}>
@@ -68,7 +82,7 @@ export const TrainingForm: React.FC<TrainingFormProps> = ({}) => {
                                 {formik.values.exercises
                                     .sort((a, b) => a.id - b.id)
                                     .map((exercise) => (
-                                        <ExerciseContainer key={exercise.id} exercise={exercise} edit />
+                                        <ExerciseContainer key={exercise.id} exercise={exercise} removeExercise={removeExercise} edit />
                                     ))}
                             </Paper>
                         }
