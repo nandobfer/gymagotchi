@@ -8,16 +8,16 @@ import { DeleteForever } from "@mui/icons-material"
 
 interface ExerciseContainerProps {
     exercise: Exercise
-    removeExercise: (exercise: Exercise) => void
+    removeExercise?: (exercise: Exercise) => void
     edit?: boolean
 }
 
 export const ExerciseContainer: React.FC<ExerciseContainerProps> = ({ exercise, edit, removeExercise }) => {
     const navigate = useNavigate()
     const seriesArray = useArray().newArray(Number(exercise.series))
-    const { clocking, setClocking } = useStopwatch()
+    const { setClocking } = useStopwatch()
 
-    const seriesDone = seriesArray.map((index) => useState(false))
+    const seriesDone = seriesArray.map((_) => useState(false))
     const [done, setDone] = useState(false)
 
     useEffect(() => {
@@ -73,7 +73,12 @@ export const ExerciseContainer: React.FC<ExerciseContainerProps> = ({ exercise, 
                         >
                             <EditIcon sx={{ width: "5vw", height: "5vw" }} />
                         </Button>
-                        <Button variant="outlined" color="error" sx={{ width: "7vw", minWidth: "7vw" }} onClick={() => removeExercise(exercise)}>
+                        <Button
+                            variant="outlined"
+                            color="error"
+                            sx={{ width: "7vw", minWidth: "7vw" }}
+                            onClick={() => (removeExercise ? removeExercise(exercise) : {})}
+                        >
                             <DeleteForever sx={{ width: "5vw", height: "5vw" }} />
                         </Button>
                     </Box>
