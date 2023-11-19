@@ -51,6 +51,7 @@ export const ExerciseContainer: React.FC<ExerciseContainerProps> = ({ exercise, 
                         {seriesArray.map((index) => (
                             <Checkbox
                                 edge="end"
+                                color={done ? "success" : "primary"}
                                 checked={seriesDone[index - 1][0]}
                                 onChange={(_, checked) => {
                                     seriesDone[index - 1][1](checked)
