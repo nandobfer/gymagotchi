@@ -75,7 +75,7 @@ export const TrainingForm: React.FC<TrainingFormProps> = ({}) => {
                     <Route
                         index
                         element={
-                            <Paper sx={{ flexDirection: "column", width: "80vw", padding: "5vw", gap: "3vw" }}>
+                            <Paper sx={{ flexDirection: "column", width: "80vw", padding: "5vw", gap: "3vw", height: "70vh", overflowY: "auto" }}>
                                 <Button variant="outlined" onClick={() => navigate("exercise")}>
                                     new exercise
                                 </Button>

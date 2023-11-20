@@ -39,7 +39,7 @@ export const ExerciseContainer: React.FC<ExerciseContainerProps> = ({ exercise, 
         >
             <Box sx={{ gap: "0vw", flexDirection: "column" }}>
                 <p style={{ textOverflow: "ellipsis", overflow: "hidden", whiteSpace: "nowrap", width: "50vw" }}>{exercise.name}</p>
-                <p>
+                <p style={{ width: "50vw" }}>
                     {exercise.series || 0}x {exercise.weight.text} {exercise.weight.unit}
                 </p>
                 <Box sx={{ color: done ? "success.main" : "warning.main" }}>
