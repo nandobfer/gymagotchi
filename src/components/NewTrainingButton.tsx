@@ -13,6 +13,7 @@ export const NewTrainingButton: React.FC<NewTrainingButtonProps> = ({}) => {
             color="success"
             sx={{
                 width: "80vw",
+                minHeight: "45vh",
                 height: "auto",
                 flexShrink: 0,
                 borderWidth: "2px",
